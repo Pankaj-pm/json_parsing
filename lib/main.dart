@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:json_parsing/fatch_data.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,7 +36,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   Map<String, dynamic>? jsonDecodeData;
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,9 +52,9 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: (jsonDecodeData?["sub"] as List?)?.length??0,
+                itemCount: (jsonDecodeData?["sub"] as List?)?.length ?? 0,
                 itemBuilder: (context, index) {
-                  var list = (jsonDecodeData!["sub"] as List).map((e) => e as Map<String,dynamic>).toList();
+                  var list = (jsonDecodeData!["sub"] as List).map((e) => e as Map<String, dynamic>).toList();
                   var cl = (list[index]["chap"] as List).map((e) => "$e").toList();
                   print(cl.runtimeType);
                   return ListTile(
@@ -71,25 +71,29 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async{
+        onPressed: () async {
           // String data =
           //     "{\"name\":\"S1\",\"sub\":[{\"sub_name\":\"Flutter\",\"mark\":10,\"chap\":[\"c1\",\"c2\",\"chap11\",\"chap88\"]},{\"sub_name\":\"c\",\"mark\":8,\"chap\":[\"c8\",\"c6\",\"ch11\"]},{\"sub_name\":\"c++\",\"mark\":8,\"chap\":[\"c8\",\"c2\"]}]}";
           // jsonDecodeData = jsonDecode(data);
           // print(jsonDecodeData?["name"]);
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => FatchData(),
+              ));
 
-
-           var fileData=await rootBundle.loadString("assets/sample_data.json");
-           var fileDatas=await rootBundle.loadString("assets/student_data.json");
-           jsonDecodeData = jsonDecode(fileDatas);
-
-           var fd = jsonDecode(fileData);
-
-           print(fileData);
-           print(fd["fruit"]);
-
-          setState(() {
-
-          });
+          //  var fileData=await rootBundle.loadString("assets/sample_data.json");
+          //  var fileDatas=await rootBundle.loadString("assets/student_data.json");
+          //  jsonDecodeData = jsonDecode(fileDatas);
+          //
+          //  var fd = jsonDecode(fileData);
+          //
+          //  print(fileData);
+          //  print(fd["fruit"]);
+          //
+          // setState(() {
+          //
+          // });
         },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
