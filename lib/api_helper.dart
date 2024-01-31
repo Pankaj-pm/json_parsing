@@ -1,3 +1,5 @@
+
+
 import 'package:http/http.dart' as http;
 
 class ApiHelper {
@@ -10,17 +12,23 @@ class ApiHelper {
     return obj;
   }
 
-  Future<String> getApiData(String endPoint)async{
+  Future<String> getApiData(String endPoint) async {
     //https://jsonplaceholder.typicode.com/comments?postId=1
     //https://jsonplaceholder.typicode.com/posts
 
-    var future =await http.get(Uri.parse("$_baseUrl$endPoint"));
+    var future = await http.get(Uri.parse("$_baseUrl$endPoint"));
     return future.body;
   }
 
-  Future<String> getApiDatabbb(String url)async{
+  Future<String?> getApiDataWithUrl(Uri uri) async {
 
-    var future =await http.get(Uri.parse(url));
-    return future.body;
+
+    var future = await http.get(uri);
+    if(future.statusCode==200){
+      return future.body;
+    }else{
+      return null;
+    }
+
   }
 }

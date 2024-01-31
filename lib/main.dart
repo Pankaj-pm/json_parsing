@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:json_parsing/fatch_data.dart';
+import 'package:json_parsing/fatch_img_data.dart';
 
 void main() {
   runApp(const MyApp());
@@ -79,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => FatchData(),
+                builder: (context) => FatchImgData(),
               ));
 
           //  var fileData=await rootBundle.loadString("assets/sample_data.json");
