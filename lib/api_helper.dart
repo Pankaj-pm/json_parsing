@@ -1,5 +1,3 @@
-
-
 import 'package:http/http.dart' as http;
 
 class ApiHelper {
@@ -21,14 +19,23 @@ class ApiHelper {
   }
 
   Future<String?> getApiDataWithUrl(Uri uri) async {
-
-
     var future = await http.get(uri);
-    if(future.statusCode==200){
+    if (future.statusCode == 200) {
       return future.body;
-    }else{
+    } else {
+      return null;
+    }
+  }
+
+  Future<String?> post(String url, Map<String, dynamic> body) async {
+    var postReq = await http.post(Uri.parse(url), body: body);
+
+    if (postReq.statusCode >= 200 && postReq.statusCode <= 299) {
+      return postReq.body;
+    } else {
       return null;
     }
 
+    return "";
   }
 }

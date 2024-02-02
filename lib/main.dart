@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:json_parsing/fatch_data.dart';
 import 'package:json_parsing/fatch_img_data.dart';
+import 'package:json_parsing/fatch_post_data.dart';
 
 void main() {
   runApp(const MyApp());
@@ -77,10 +78,16 @@ class _MyHomePageState extends State<MyHomePage> {
           //     "{\"name\":\"S1\",\"sub\":[{\"sub_name\":\"Flutter\",\"mark\":10,\"chap\":[\"c1\",\"c2\",\"chap11\",\"chap88\"]},{\"sub_name\":\"c\",\"mark\":8,\"chap\":[\"c8\",\"c6\",\"ch11\"]},{\"sub_name\":\"c++\",\"mark\":8,\"chap\":[\"c8\",\"c2\"]}]}";
           // jsonDecodeData = jsonDecode(data);
           // print(jsonDecodeData?["name"]);
+          // Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //       builder: (context) => FatchImgData(),
+          //     ));
+
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => FatchImgData(),
+                builder: (context) => FatchpostData(),
               ));
 
           //  var fileData=await rootBundle.loadString("assets/sample_data.json");

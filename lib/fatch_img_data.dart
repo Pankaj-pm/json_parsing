@@ -1,3 +1,4 @@
+import 'package:async_wallpaper/async_wallpaper.dart';
 import 'package:flutter/material.dart';
 import 'package:json_parsing/api_helper.dart';
 import 'package:json_parsing/pixabay_model.dart';
@@ -24,21 +25,24 @@ class _FatchImgDataState extends State<FatchImgData> {
       body: FutureBuilder(
         future: ApiHelper().getApiDataWithUrl(parse),
         builder: (context, snapshot) {
-          if(snapshot.hasData && snapshot.data!=null){
-            var data = pixabayModelFromJson(snapshot.data??"");
+          if (snapshot.hasData && snapshot.data != null) {
+            var data = pixabayModelFromJson(snapshot.data ?? "");
             return ListView.builder(
-              itemCount: data.hits?.length??0,
+              itemCount: data.hits?.length ?? 0,
               itemBuilder: (context, index) {
                 var hit = data.hits![index];
-                return Image.network(hit.previewUrl??"");
+                return ListTile(
+                  onTap: () {
+                    setWallpaper(hit.previewUrl??"");
+                  },
+                  leading: Image.network(hit.previewUrl ?? "", height: 200, width: 100, fit: BoxFit.cover),
+                  title: Text(hit.tags ?? ""),
+                );
               },
             );
-          }else{
-
+          } else {
             return Center(child: CircularProgressIndicator());
           }
-
-
         },
       ),
       floatingActionButton: FloatingActionButton(
@@ -53,6 +57,16 @@ class _FatchImgDataState extends State<FatchImgData> {
           print(parse);
         },
       ),
+    );
+  }
+
+  void setWallpaper(String url) {
+    AsyncWallpaper.setWallpaper(
+      url: url,
+      wallpaperLocation: AsyncWallpaper.BOTH_SCREENS,
+      goToHome: true,
+      toastDetails: ToastDetails.success(),
+      errorToastDetails: ToastDetails.error(),
     );
   }
 }
